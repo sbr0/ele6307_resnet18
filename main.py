@@ -45,3 +45,9 @@ scheduler = MultiStepLR(optimizer, milestones=[80, 121], gamma=0.1)
 
 network.fit(criterion, optimizer, scheduler, nb_epochs=epochs, trainloader=trainloader)
 print('Test accuracy: {:.2f}%'.format(network.test_acc(valloader)*100))
+
+torch.save(network.state_dict(), 'ResNet18_state_dict.pt')
+torch.save(network, 'ResNet18_entire_model.pt')
+# Throws errors on Softplus:
+# network_scripted = torch.jit.script(network)
+# network_scripted.save('ResNet18_torchScript.pt')
